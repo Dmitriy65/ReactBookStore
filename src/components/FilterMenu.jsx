@@ -1,20 +1,13 @@
 import React from "react";
-import { Menu } from "semantic-ui-react";
+import { Menu, Input } from "semantic-ui-react";
 
 const FilterMenu = props => {
-  const { setFilter, filterBy } = props;
+  const { setFilter, setSearchQuery, filterBy, searchQuery } = props;
 
   return (
     <Menu secondary>
       <Menu.Item active={filterBy === "all"} onClick={() => setFilter("all")}>
         Все
-      </Menu.Item>
-
-      <Menu.Item
-        active={filterBy === "popular"}
-        onClick={() => setFilter("popular")}
-      >
-        Популярные
       </Menu.Item>
       <Menu.Item
         active={filterBy === "price_high"}
@@ -33,6 +26,14 @@ const FilterMenu = props => {
         onClick={() => setFilter("author")}
       >
         Автор
+      </Menu.Item>
+      <Menu.Item>
+        <Input
+          icon="search"
+          onChange={e => setSearchQuery(e.target.value)}
+          value={searchQuery}
+          placeholder="Введите запрос"
+        ></Input>
       </Menu.Item>
     </Menu>
   );
