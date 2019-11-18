@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as booksActions from "../actions/books";
-import App from "./../components/App";
+import App from "../components/App";
 import orderBy from "lodash/orderBy";
 
 const sortBy = (books, filterBy, searchQuery) => {
@@ -30,8 +30,7 @@ const sortBy = (books, filterBy, searchQuery) => {
 };
 
 const mapStateToProps = ({ books, filter }) => ({
-  books:
-    books.items && sortBy(books.items, filter.filterBy, filter.searchQuery),
+  books: books.items && sortBy(books.items, filter.filterBy, filter.searchQuery),
   isReady: books.isReady
 });
 

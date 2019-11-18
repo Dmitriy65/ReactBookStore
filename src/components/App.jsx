@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Container } from "semantic-ui-react";
 import { Card } from "semantic-ui-react";
-import Menu from "./Menu";
-import BookCard from "./BookCard";
+
+import BookCard from "../containers/BookCard";
 import FilterMenu from "../containers/Filter";
+import Menu from "../containers/Menu";
 
 class App extends Component {
   async componentDidMount() {
