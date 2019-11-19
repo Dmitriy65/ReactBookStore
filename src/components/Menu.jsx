@@ -40,7 +40,7 @@ const MenuComponent = ({ totalPrice, count, items }) => (
         }
         content={
           items.length >= 1
-            ? items.map((books, i) => <CartComponent {...books.book} countOfEachBook={books.count} key={i}/>)
+        ? items.map((books, i) => <CartComponent {...books.book} countOfEachBook={books.count} key={i}/>)
             : "В корзине пусто..."
         }
         on="click"

@@ -13,23 +13,27 @@ const booksCount = (bookItem, books) => {
   );
 };
 
-const sortBooks = books => {
-  //debugger;
-  const sortedBooks = [];
-  for (let i = 0; i < books.length; i++) {
-    const count = booksCount(books[i], books);
-    console.log(count);
+const deleteDuplicateBook = (bookItem, books) => {
+  return books.filter(book => Number(book.id) !== Number(bookItem.id));
+}
 
+const sortBooks = books => {
+  debugger;
+  const sortedBooks = [];
+  const Length = books.length;
+  for (let i = 0; i < Length; i++) {
+    let count = booksCount(books[0], books);
     if (count) {
       let obj = {
         count: count,
-        book: books[i]
+        book: books[0]
       };
       sortedBooks.push(obj);
-      books = books.filter(book => Number(book.id) !== Number(books[i].id));
+      books = deleteDuplicateBook(books[0], books);
+     
     }
+
   }
-  console.log(sortedBooks);
   
   return sortedBooks;
 };
