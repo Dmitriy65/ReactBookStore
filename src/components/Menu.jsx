@@ -1,16 +1,51 @@
 import React from "react";
-import { Menu } from "semantic-ui-react";
+import { Menu, Popup, List, Button, Image } from "semantic-ui-react";
 
-const MenuComponent = ({ totalPrice, count }) => (
+const CartComponent = ({
+  title,
+  id,
+  image,
+  removeFromCart,
+  countOfEachBook
+}) => (
+  <List selection divided verticalAlign="middle">
+    <List.Item>
+      <List.Content floated="right">
+        <Button onClick={() => removeFromCart(id)} color="red">
+          Удалить
+        </Button>
+      </List.Content>
+      <Image avatar src={image} />
+      <List.Content>
+        {title} : {countOfEachBook}{countOfEachBook === 1 ? " книга" : " книги"}
+      </List.Content>
+    </List.Item>
+  </List>
+);
+
+const MenuComponent = ({ totalPrice, count, items }) => (
   <Menu>
     <Menu.Item name="browse">Магазин книг</Menu.Item>
+
     <Menu.Menu position="right">
-      <Menu.Item name="submit">
-        Итого: &nbsp; <b>{totalPrice}</b> руб.
-      </Menu.Item>
       <Menu.Item name="signup">
-        Корзина (<b>{count}</b>)
+        Итого: &nbsp; <b>{totalPrice}</b>&nbsp;руб.
       </Menu.Item>
+
+      <Popup
+        trigger={
+          <Menu.Item name="help">
+            Корзина (<b>{count}</b>)
+          </Menu.Item>
+        }
+        content={
+          items.length >= 1
+            ? items.map((books, i) => <CartComponent {...books.book} countOfEachBook={books.count} key={i}/>)
+            : "В корзине пусто..."
+        }
+        on="click"
+        hideOnScroll
+      />
     </Menu.Menu>
   </Menu>
 );
