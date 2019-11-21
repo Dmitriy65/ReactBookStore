@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as cartActions from "../actions/cart";
+import { userLogout } from "../actions/auth";
 import Menu from "./../components/Menu";
 
 const booksCount = (bookItem, books) => {
@@ -15,10 +16,9 @@ const booksCount = (bookItem, books) => {
 
 const deleteDuplicateBook = (bookItem, books) => {
   return books.filter(book => Number(book.id) !== Number(bookItem.id));
-}
+};
 
 const sortBooks = books => {
-  debugger;
   const sortedBooks = [];
   const Length = books.length;
   for (let i = 0; i < Length; i++) {
@@ -30,22 +30,21 @@ const sortBooks = books => {
       };
       sortedBooks.push(obj);
       books = deleteDuplicateBook(books[0], books);
-     
     }
-
   }
-  
+
   return sortedBooks;
 };
 
 const mapStateToProps = ({ cart }) => ({
   totalPrice: cart.items.reduce((total, book) => total + book.price, 0),
   count: cart.items.length,
-  items: sortBooks(cart.items)  
+  items: sortBooks(cart.items)
 });
 
 const mapDispatchToProps = dispatch => ({
-  ...bindActionCreators(cartActions, dispatch)
+  ...bindActionCreators(cartActions, dispatch),
+  userLogout: () => dispatch(userLogout())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

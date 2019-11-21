@@ -1,33 +1,53 @@
 import React, { Component } from "react";
-import { Container } from "semantic-ui-react";
-import { Card } from "semantic-ui-react";
-
-import BookCard from "../containers/BookCard";
-import FilterMenu from "../containers/Filter";
-import Menu from "../containers/Menu";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link
+} from "react-router-dom";
+import Login from "../containers/Login";
+import Signup from "../containers/Signup";
+import HomePage from "../containers/HomePage";
+import PrivateRoute from "../components/PrivateRoute";
+import { Button, Welcom } from "../components/HelpComponents";
 
 class App extends Component {
-  async componentDidMount() {
-    const { setBooks } = this.props;
-    let response = await fetch("/books.json");
-    let books = await response.json();
-
-    setBooks(books);
+  componentDidMount() {
+    this.props.getProfile();
   }
 
   render() {
-    const { books, isReady, setFilter } = this.props;
-
+    const { isLogged } = this.props;
+    const username = localStorage.getItem("username");
     return (
-      <Container>
-        <Menu />
-        <FilterMenu setFilter={setFilter} />
-        <Card.Group>
-          {!isReady
-            ? "books is loading..."
-            : books.map(book => <BookCard {...book} key={book.id} />)}
-        </Card.Group>
-      </Container>
+      <div>
+        <Router>
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to="/profile" />}>
+              <Welcom>
+                Welcome in our bookStore!
+                <br />
+                Please select any option to continue using our book store`
+              </Welcom>
+              <Button>
+                <Link to="/profile">
+                  Come in your profile{" "}
+                  {isLogged === true
+                    ? `(${username} you have already authorized)`
+                    : "by enter pass and email"}
+                </Link>
+              </Button>
+              <Button>
+                <Link to="/signup">Register new user in the system</Link>
+              </Button>
+            </Route>
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute path="/profile" component={HomePage} />
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }

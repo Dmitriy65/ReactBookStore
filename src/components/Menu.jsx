@@ -17,13 +17,14 @@ const CartComponent = ({
       </List.Content>
       <Image avatar src={image} />
       <List.Content>
-        {title} : {countOfEachBook}{countOfEachBook === 1 ? " книга" : " книги"}
+        {title} : {countOfEachBook}
+        {countOfEachBook === 1 ? " книга" : " книги"}
       </List.Content>
     </List.Item>
   </List>
 );
 
-const MenuComponent = ({ totalPrice, count, items }) => (
+const MenuComponent = ({ totalPrice, count, items, userLogout }) => (
   <Menu>
     <Menu.Item name="browse">Магазин книг</Menu.Item>
 
@@ -40,12 +41,21 @@ const MenuComponent = ({ totalPrice, count, items }) => (
         }
         content={
           items.length >= 1
-        ? items.map((books, i) => <CartComponent {...books.book} countOfEachBook={books.count} key={i}/>)
+            ? items.map((books, i) => (
+                <CartComponent
+                  {...books.book}
+                  countOfEachBook={books.count}
+                  key={i}
+                />
+              ))
             : "В корзине пусто..."
         }
         on="click"
         hideOnScroll
       />
+      <Menu.Item name="signup">
+        <button onClick={() => userLogout()}>Log out from the system!</button>
+      </Menu.Item>
     </Menu.Menu>
   </Menu>
 );
