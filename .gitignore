@@ -8,13 +8,9 @@ node_modules
 # testing
 /coverage
 
-**/node_modules
-
 
 # production
 /build
-/server/node_modules
-/server/config.env
 
 # misc
 .DS_Store
