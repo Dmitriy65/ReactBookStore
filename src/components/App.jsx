@@ -9,7 +9,7 @@ import {
 import Login from "../containers/Login";
 import Signup from "../containers/Signup";
 import HomePage from "../containers/HomePage";
-import PrivateRoute from "../components/PrivateRoute";
+import PrivateRouter from "../containers/PrivateRouter";
 import { Button, Welcom } from "../components/HelpComponents";
 
 class App extends Component {
@@ -19,7 +19,6 @@ class App extends Component {
 
   render() {
     const { isLogged } = this.props;
-    const username = localStorage.getItem("username");
     return (
       <div>
         <Router>
@@ -33,8 +32,8 @@ class App extends Component {
               <Button>
                 <Link to="/profile">
                   Come in your profile{" "}
-                  {isLogged === true
-                    ? `(${username} you have already authorized)`
+                  {isLogged === 'true'
+                    ? `(you have already authorized)`
                     : "by enter pass and email"}
                 </Link>
               </Button>
@@ -44,7 +43,7 @@ class App extends Component {
             </Route>
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <PrivateRoute path="/profile" component={HomePage} />
+            <PrivateRouter path="/profile" component={HomePage} />
           </Switch>
         </Router>
       </div>
