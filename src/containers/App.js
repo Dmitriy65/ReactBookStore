@@ -7,7 +7,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = ({ auth }) => ({
-  isLogged: auth.isLogged
+  isLogged: auth.isLogged === "true" ? true : false
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

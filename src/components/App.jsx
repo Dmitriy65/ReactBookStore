@@ -10,7 +10,7 @@ import Login from "../containers/Login";
 import Signup from "../containers/Signup";
 import HomePage from "../containers/HomePage";
 import PrivateRouter from "../containers/PrivateRouter";
-import { Button, Welcom } from "../components/HelpComponents";
+import { Button, Welcome } from "./StyledElems";
 
 class App extends Component {
   componentDidMount() {
@@ -24,15 +24,15 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/profile" />}>
-              <Welcom>
+              <Welcome>
                 Welcome in our bookStore!
                 <br />
-                Please select any option to continue using our book store`
-              </Welcom>
+                Please select any option to continue using our book store
+              </Welcome>
               <Button>
                 <Link to="/profile">
                   Come in your profile{" "}
-                  {isLogged === 'true'
+                  {isLogged === true
                     ? `(you have already authorized)`
                     : "by enter pass and email"}
                 </Link>
@@ -40,6 +40,17 @@ class App extends Component {
               <Button>
                 <Link to="/signup">Register new user in the system</Link>
               </Button>
+              {isLogged === true ? (
+                ""
+              ) : (
+                <div style={{ margin: "auto", width: "200px" }}>
+                  <span>Account data for testing this app</span>
+                  <br />
+                  <span>Email: test@test.ru</span>
+                  <br />
+                  <span>Password: test123</span>
+                </div>
+              )}
             </Route>
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />

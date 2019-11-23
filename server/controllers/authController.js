@@ -59,20 +59,20 @@ exports.register = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    
     res.status(404).json({
       status: "fail",
-      message: "register error!"
+      message: err.message
     });
   }
 };
 
 exports.login = async (req, res) => {
   try {
+    debugger;
     const { email, password } = req.body;
 
     if (!email || !password) {
-      throw new Error("please provide correct email or password");
+      throw new Error("Please provide correct email or password");
     }
 
     const user = await User.findOne({ email }).select("+password");
@@ -90,9 +90,11 @@ exports.login = async (req, res) => {
       user: user
     });
   } catch (err) {
+    console.log(err);
+    
     res.status(404).json({
       status: "fail",
-      message: 'Invalid email or password. Please try again...'
+      message: err.message
     });
   }
 };

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import TextField from "@material-ui/core/TextField";
 
 class Login extends Component {
   state = {
@@ -15,34 +16,67 @@ class Login extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.userLogin(this.state);
+    //for interaction with app if you can`t access to DB.
+    if (
+      this.state.email === "test@test.ru" &&
+      this.state.password === "test123"
+    ) {
+      this.props.testUserLogin(this.state);
+    } else {
+      this.props.userLogin(this.state);
+    }
+
+    this.setState({
+      password: ""
+    });
   };
 
   render() {
+    const { loginError } = this.props;
+    const errorMessage = loginError ? (
+      <span style={{ fontSize: "15px", color: "red" }}>{loginError}</span>
+    ) : (
+      ""
+    );
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        onSubmit={this.handleSubmit}
+        style={{ textAlign: "center", marginTop: "250px" }}
+      >
         <h1>Login in the BookStore</h1>
 
-        <label>Email</label>
-        <input
+        <TextField
           name="email"
           placeholder="Email"
           value={this.state.email}
           onChange={this.handleChange}
+          error={errorMessage}
+          helperText={this.state.email === "" ? "Empty field!" : ""}
         />
         <br />
 
-        <label>Password</label>
-        <input
+        <TextField
+          placeholder="Password"
           type="password"
           name="password"
-          placeholder="Password"
           value={this.state.password}
           onChange={this.handleChange}
+          error={errorMessage}
+          helperText={this.state.email === "" ? "Empty field!" : ""}
+        />
+
+        <br />
+        <input
+          type="submit"
+          style={{
+            marginTop: "15px",
+            borderRadius: "100px",
+            padding: "5px",
+            backgroundColor: "aqua"
+          }}
         />
         <br />
-
-        <input type="submit" />
+        {errorMessage}
       </form>
     );
   }

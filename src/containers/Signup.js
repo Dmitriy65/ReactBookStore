@@ -6,4 +6,7 @@ const mapDispatchToProps = dispatch => ({
   userRegister: user => dispatch(userRegister(user))
 });
 
-export default connect(null, mapDispatchToProps)(Signup);
+const mapStateToProps = ({ auth }) => ({
+  registerError: auth.registerError
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

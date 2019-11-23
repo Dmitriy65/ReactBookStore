@@ -54,7 +54,12 @@ const MenuComponent = ({ totalPrice, count, items, userLogout }) => (
         hideOnScroll
       />
       <Menu.Item name="signup">
-        <button onClick={() => userLogout()}>Log out from the system!</button>
+        <button
+          onClick={() => userLogout()}
+          style={{ borderRadius: "100px", padding: "5px" }}
+        >
+          Log out from the system!
+        </button>
       </Menu.Item>
     </Menu.Menu>
   </Menu>

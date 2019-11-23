@@ -9,7 +9,7 @@ export const Button = styled.button`
   border-radius: 100px;
 `;
 
-export const Welcom = styled.h1`
+export const Welcome = styled.h1`
   text-align: center;
   font-size: 2em;
 `;
