@@ -34,7 +34,7 @@ class App extends Component {
                   Come in your profile{" "}
                   {isLogged === true
                     ? `(you have already authorized)`
-                    : "by enter pass and email"}
+                    : "by enter password and email"}
                 </Link>
               </Button>
               <Button>

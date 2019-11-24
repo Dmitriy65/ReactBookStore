@@ -11,7 +11,10 @@ const CartComponent = ({
   <List selection divided verticalAlign="middle">
     <List.Item>
       <List.Content floated="right">
-        <Button onClick={() => removeFromCart(id)} color="red">
+        <Button onClick={() => {
+          var isDeleteBook = window.confirm(`Вы уверены, что хотите удалить книгу - ${title}`);
+          if (isDeleteBook) removeFromCart(id);
+        }} color="red">
           Удалить
         </Button>
       </List.Content>

@@ -6,7 +6,7 @@ class PrivateRouter extends Component {
   render() {
     const { component: Component, isLogged, ...rest } = this.props;
     console.log(isLogged);
-    debugger;
+    
     return (
       <Route
         {...rest}
