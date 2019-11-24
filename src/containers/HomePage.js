@@ -30,10 +30,11 @@ const sortBy = (books, filterBy, searchQuery) => {
   );
 };
 
-const mapStateToProps = ({ books, filter }) => ({
+const mapStateToProps = ({ books, filter, auth }) => ({
   books:
     books.items && sortBy(books.items, filter.filterBy, filter.searchQuery),
-  isReady: books.isReady
+  isReady: books.isReady,
+  name: auth.currentUser.name
 });
 
 const mapDispatchToProps = dispatch => ({

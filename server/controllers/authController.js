@@ -8,7 +8,7 @@ const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
-exports.protect = (req, res) => {
+exports.protect = async (req, res) => {
   let token;
   
   if (
@@ -24,10 +24,14 @@ exports.protect = (req, res) => {
   try {
     
     const verified = jwt.verify(token, process.env.JWT_SECRET);
+    
+    const user = await User.findOne({ _id: verified.id });
+    
     req.user = verified;
     res.status(200).json({
       status: "Ok",
-      message: 'Access allowed'
+      message: 'Access allowed',
+      user
     });
   } catch (err) {
     console.log(err);
@@ -87,7 +91,7 @@ exports.login = async (req, res) => {
     res.status(200).json({
       status: "success",
       token,
-      user: user
+      user
     });
   } catch (err) {
     console.log(err);

@@ -67,7 +67,8 @@ export const getProfile = () => {
           } else {
             localStorage.setItem("isLogged", true);
             dispatch(loginUserAction(data.user));
-            console.log(window.location.href);
+            console.log('data.user');
+            console.log(data.user);
             if (window.location.href !== "http://localhost:3000/profile") {
               window.location.href = "http://localhost:3000/profile";
             }
@@ -93,7 +94,7 @@ export const testUserLogin = user => {
   return dispatch => {
     localStorage.setItem("isLogged", true);
     dispatch(loginUserAction(user));
-    
+    window.location.href = "http://localhost:3000/profile";
   };
 };
 
