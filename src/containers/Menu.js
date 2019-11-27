@@ -36,11 +36,17 @@ const sortBooks = books => {
   return sortedBooks;
 };
 
-const mapStateToProps = ({ cart }) => ({
-  totalPrice: cart.items.reduce((total, book) => total + book.price, 0),
-  count: cart.items.length,
-  items: sortBooks(cart.items)
-});
+const mapStateToProps = ({ cart, auth }) => {
+  return {
+    totalPrice: cart.items.reduce((total, book) => total + book.price, 0),
+    count: cart.items.length,
+    items: sortBooks(cart.items),
+    userName:
+      typeof auth.currentUser.name === "string"
+        ? auth.currentUser.name
+        : "Гость"
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(cartActions, dispatch),

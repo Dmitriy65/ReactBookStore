@@ -17,18 +17,16 @@ class HomePage extends Component {
   }
 
   render() {
-    const { books, isReady, setFilter, name } = this.props;
+    const { books, isReady, setFilter } = this.props;
     return (
       <Container>
         <Menu />
-        <div>Здраствуйте {name}!</div>
         <FilterMenu setFilter={setFilter} />
         <Card.Group>
           {!isReady
             ? "books is loading..."
             : books.map(book => <BookCard {...book} key={book.id} />)}
         </Card.Group>
-        
       </Container>
     );
   }

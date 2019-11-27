@@ -11,10 +11,15 @@ const CartComponent = ({
   <List selection divided verticalAlign="middle">
     <List.Item>
       <List.Content floated="right">
-        <Button onClick={() => {
-          var isDeleteBook = window.confirm(`Вы уверены, что хотите удалить книгу - ${title}`);
-          if (isDeleteBook) removeFromCart(id);
-        }} color="red">
+        <Button
+          onClick={() => {
+            const isDeleteBook = window.confirm(
+              `Вы уверены, что хотите удалить книгу - ${title}`
+            );
+            if (isDeleteBook) removeFromCart(id);
+          }}
+          color="red"
+        >
           Удалить
         </Button>
       </List.Content>
@@ -27,7 +32,7 @@ const CartComponent = ({
   </List>
 );
 
-const MenuComponent = ({ totalPrice, count, items, userLogout }) => (
+const MenuComponent = ({ totalPrice, count, items, userLogout, userName }) => (
   <Menu>
     <Menu.Item name="browse">Магазин книг</Menu.Item>
 
@@ -56,13 +61,25 @@ const MenuComponent = ({ totalPrice, count, items, userLogout }) => (
         on="click"
         hideOnScroll
       />
-      <Menu.Item name="signup">
-        <button
-          onClick={() => userLogout()}
-          style={{ borderRadius: "100px", padding: "5px" }}
-        >
-          Log out from the system!
-        </button>
+      <Menu.Item name="browse">
+        <Popup
+          trigger={<div>Здраствуйте {userName}!</div>}
+          content={
+            <button
+              onClick={() => {
+                const isLogout = window.confirm(
+                  `${userName}, вы уверены, что хотите выйти из своего профиля?`
+                );
+                if (isLogout) userLogout();
+              }}
+              style={{ padding: "5px" }}
+            >
+              Выйти из профиля!
+            </button>
+          }
+          on="click"
+          hideOnScroll
+        />
       </Menu.Item>
     </Menu.Menu>
   </Menu>
