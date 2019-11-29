@@ -41,10 +41,7 @@ const mapStateToProps = ({ cart, auth }) => {
     totalPrice: cart.items.reduce((total, book) => total + book.price, 0),
     count: cart.items.length,
     items: sortBooks(cart.items),
-    userName:
-      typeof auth.currentUser.name === "string"
-        ? auth.currentUser.name
-        : "Гость"
+    userName: auth.currentUser.name ? auth.currentUser.name : "Гость"
   };
 };
 

@@ -23,7 +23,7 @@ class PrivateRouter extends Component {
 }
 
 const mapStateToProps = ({ auth }) => ({
-  isLogged: auth.isLogged === "true" ? true : false
+  isLogged: auth.isLogged
 });
 
 export default connect(mapStateToProps, null)(PrivateRouter);
