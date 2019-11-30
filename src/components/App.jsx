@@ -40,17 +40,6 @@ class App extends Component {
               <Button>
                 <Link to="/signup">Register new user in the system</Link>
               </Button>
-              {isLogged === true ? (
-                ""
-              ) : (
-                <div style={{ margin: "auto", width: "200px" }}>
-                  <span>Account data for testing this app</span>
-                  <br />
-                  <span>Email: test@test.ru</span>
-                  <br />
-                  <span>Password: test123</span>
-                </div>
-              )}
             </Route>
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />

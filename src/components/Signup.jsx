@@ -17,6 +17,11 @@ class SignUp extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.userRegister(this.state);
+    this.setState({
+      name: '',
+      email: '',
+      password: ''
+    });
   };
 
   render() {
@@ -39,7 +44,7 @@ class SignUp extends Component {
           value={this.state.name}
           onChange={this.handleChange}
           error={registerError}
-          helperText={this.state.email === "" ? "Empty field!" : ""}
+          helperText={this.state.name === "" ? "Empty field!" : ""}
         />
         <br />
 
@@ -60,7 +65,7 @@ class SignUp extends Component {
           error={registerError}
           value={this.state.password}
           onChange={this.handleChange}
-          helperText={this.state.email === "" ? "Empty field!" : ""}
+          helperText={this.state.password === "" ? "Empty field!" : ""}
         />
         <br />
 
