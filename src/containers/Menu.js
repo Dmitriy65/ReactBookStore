@@ -47,7 +47,7 @@ const mapStateToProps = ({ cart, auth }) => {
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(cartActions, dispatch),
-  userLogout: () => dispatch(userLogout())
+  userLogout: bindActionCreators(userLogout, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

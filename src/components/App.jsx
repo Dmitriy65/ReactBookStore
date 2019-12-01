@@ -10,43 +10,41 @@ import Login from "../containers/Login";
 import Signup from "../containers/Signup";
 import HomePage from "../containers/HomePage";
 import PrivateRouter from "../containers/PrivateRouter";
-import { Button, Welcome } from "./StyledElems";
+import { button, welcome } from "./StyledElems";
 
 class App extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.getProfile();
   }
 
   render() {
     const { isLogged } = this.props;
     return (
-      <div>
-        <Router>
-          <Switch>
-            <Route exact path="/" render={() => <Redirect to="/profile" />}>
-              <Welcome>
-                Welcome in our bookStore!
-                <br />
-                Please select any option to continue using our book store
-              </Welcome>
-              <Button>
-                <Link to="/profile">
-                  Come in your profile{" "}
-                  {isLogged === true
-                    ? `(you have already authorized)`
-                    : "by enter password and email"}
-                </Link>
-              </Button>
-              <Button>
-                <Link to="/signup">Register new user in the system</Link>
-              </Button>
-            </Route>
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <PrivateRouter path="/profile" component={HomePage} />
-          </Switch>
-        </Router>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/profile" />}>
+            <div style={welcome}>
+              Welcome in our bookStore!
+              <br />
+              Please select any option to continue using our book store
+            </div>
+            <div style={button}>
+              <Link to="/profile">
+                Come in your profile{" "}
+                {isLogged === true
+                  ? `(you have already authorized)`
+                  : "by enter password and email"}
+              </Link>
+            </div>
+            <div style={button}>
+              <Link to="/signup">Register new user in the system</Link>
+            </div>
+          </Route>
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
+          <PrivateRouter path="/profile" component={HomePage} />
+        </Switch>
+      </Router>
     );
   }
 }

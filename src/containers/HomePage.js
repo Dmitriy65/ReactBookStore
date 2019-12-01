@@ -38,8 +38,8 @@ const mapStateToProps = ({ books, filter }) => ({
 
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(booksActions, dispatch),
-  getProfile: () => dispatch(getProfile()),
-  userLogout: () => dispatch(userLogout())
+  getProfile: bindActionCreators(getProfile, dispatch),
+  userLogout: bindActionCreators(userLogout, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

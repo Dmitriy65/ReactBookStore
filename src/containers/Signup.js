@@ -4,7 +4,7 @@ import Signup from "../components/Signup";
 
 const mapDispatchToProps = dispatch => ({
   userRegister: user => dispatch(userRegister(user))
-});
+}); 
 
 const mapStateToProps = ({ auth }) => ({
   registerError: auth.registerError
